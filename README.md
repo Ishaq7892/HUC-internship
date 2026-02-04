@@ -17,6 +17,7 @@ Most operations of GIT can be performed without the use of the Internet or onlin
 
 GitHub is a centralized or cloud-based location that hosts GIT repositories online.
 
+
 GitHub provides:
 
 A remote location for storing GIT projects and files on the Internet
@@ -29,7 +30,6 @@ Issue tracking and project management functionality
 
 Integration with CI/CD tools and deployment tools
 
-Reasons to use Git and GitHub
 
 2. Why they are used ?
 
@@ -43,6 +43,7 @@ Managing different code-versions.
 
 Providing a way for developers to work on code in parallel (through branches).
 
+
 GitHub
 
 Sharing code with others.
@@ -54,6 +55,7 @@ Reviewing and improving code quality.
 Managing open source and private projects.
 
 Automating builds, testing and deployment.
+
 
 3. Basic Git workflow
 
@@ -76,6 +78,7 @@ Merge branches into the main branch
 1. git checkout main
    
 2. git merge new-feature-name
+
 
 4. How GitHub helps in team collaboration
 
