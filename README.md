@@ -80,6 +80,8 @@ Merge branches into the main branch
 2. git merge new-feature-name
 
 
+
+
 4. How GitHub helps in team collaboration
 
 GitHub allows for organized workflows between multiple developers using the following features that promote teamwork.
