@@ -1,16 +1,16 @@
 # HUC-internship
 1. What Git and GitHub ?
 
-GIT is an open-source, distributed version control system for tracking changes in software development and on different types of files over time. Developers can:
-
+GIT is an open-source, distributed version control system for tracking changes in software development and on different types of files over time.
+Developers can:
 Keep many versions of their work
 Go back to an earlier version of their work in case something is broken.
 Create a branch or work on new features without disturbing the code in the original repository.
 Be able to merge work from two or more contributors.
 Most operations of GIT can be performed without the use of the Internet or online access.
 
-GitHub is a centralized or cloud-based location that hosts GIT repositories online. GitHub provides:
-
+GitHub is a centralized or cloud-based location that hosts GIT repositories online.
+GitHub provides:
 A remote location for storing GIT projects and files on the Internet
 Collaboration tools for teams
 Code review and code discussion functions
