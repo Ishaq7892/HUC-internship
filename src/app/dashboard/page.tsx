@@ -11,6 +11,12 @@ export default function Dashboard() {
   const [events, setEvents] = useState<any[]>([]);
   const [registrations, setRegistrations] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [creatingEvent, setCreatingEvent] = useState(false);
+  const [eventForm, setEventForm] = useState({
+    title: '',
+    description: '',
+    date: '',
+  });
 
   useEffect(() => {
     fetchData();
@@ -53,6 +59,33 @@ export default function Dashboard() {
       }
     } catch (error) {
       toast.error('An error occurred');
+    }
+  };
+
+  const handleCreateEvent = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setCreatingEvent(true);
+
+    try {
+      const res = await fetch('/api/events', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(eventForm),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        toast.success('Event created successfully');
+        setEventForm({ title: '', description: '', date: '' });
+        fetchData();
+      } else {
+        toast.error(data.error || 'Failed to create event');
+      }
+    } catch (error) {
+      toast.error('An error occurred');
+    } finally {
+      setCreatingEvent(false);
     }
   };
 
@@ -104,6 +137,43 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+
+      <section className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+        <h2 className="text-2xl font-bold text-gray-900 mb-1">Add Event</h2>
+        <p className="text-gray-600 mb-6">Create a new event with title, description, and date.</p>
+
+        <form onSubmit={handleCreateEvent} className="grid grid-cols-1 gap-4">
+          <input
+            type="text"
+            placeholder="Event title"
+            value={eventForm.title}
+            onChange={(e) => setEventForm((prev) => ({ ...prev, title: e.target.value }))}
+            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+            required
+          />
+          <textarea
+            placeholder="Event description"
+            value={eventForm.description}
+            onChange={(e) => setEventForm((prev) => ({ ...prev, description: e.target.value }))}
+            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none min-h-28"
+            required
+          />
+          <input
+            type="datetime-local"
+            value={eventForm.date}
+            onChange={(e) => setEventForm((prev) => ({ ...prev, date: e.target.value }))}
+            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+            required
+          />
+          <button
+            type="submit"
+            disabled={creatingEvent}
+            className="w-full sm:w-fit px-5 py-2.5 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50"
+          >
+            {creatingEvent ? 'Creating...' : 'Create Event'}
+          </button>
+        </form>
+      </section>
 
       <section>
         <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">

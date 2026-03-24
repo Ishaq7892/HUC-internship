@@ -64,8 +64,10 @@ export async function POST(req: Request) {
     }
 
     const registration = await prisma.registration.create({
-      userId: session.user.id,
-      eventId,
+      data: {
+        userId: session.user.id,
+        eventId,
+      },
     });
 
     return NextResponse.json({ ...registration, _id: registration.id }, { status: 201 });

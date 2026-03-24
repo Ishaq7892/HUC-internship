@@ -22,7 +22,7 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const session = await getServerSession(authOptions);
-    if (!session || session.user.role !== "Admin") {
+    if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -32,10 +32,12 @@ export async function POST(req: Request) {
     }
 
     const event = await prisma.event.create({
-      title,
-      description,
-      date: new Date(date),
-      createdById: session.user.id,
+      data: {
+        title,
+        description,
+        date: new Date(date),
+        createdById: session.user.id,
+      },
     });
 
     return NextResponse.json(toEventDto(event), { status: 201 });
